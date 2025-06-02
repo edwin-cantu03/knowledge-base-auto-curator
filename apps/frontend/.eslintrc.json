@@ -1,0 +1,23 @@
+{
+    "extends": [
+        "next/core-web-vitals",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript",
+        "plugin:unused-imports/recommended",
+        "prettier"
+    ],
+    "plugins": ["@typescript-eslint", "unused-imports"],
+    "rules": {
+        "unused-imports/no-unused-imports": "waarn",
+        "import/order": [
+            "warn",
+            {
+                "groups": [["builtin, external"], "internal", ["parent", "sibling", "index"]],
+                "newlines-between": "always"
+            }
+        ]
+    }
+}
