@@ -7,22 +7,21 @@ def extract_kb_suggestion(message_text: str) -> dict:
     """Analyze message and return KB suggestion."""
 
     prompt = f"""
-    A team member wrote the following message in Slack:
-    
+    Message:
     "{message_text}"
 
-    Please determine if this message contains information worth documenting in a team knowledge base. If yes, extract:
+    If this message contains useful team documentation, extract:
+    - title
+    - summary
+    - doc_snippet(markdown)
 
-    1. A short topic/title for the entry
-    2. A 1-sentence summary
-    3. A suggested documentation snippet (markdown-formatted)
+    Otherwise, return nulls.
 
-    Respond in JSON format with keys: `title`, `summary`, `doc_snipper`.
-    If no documentation is needed, return: {{"title": null, "summary": null, "doc_snippet": null}}
+    Respond in JSON format with keys: title, summary, doc_snippet.
     """
 
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.3
     )
